@@ -1,8 +1,6 @@
 import numpy as np
 
 
-
-
 lastIndexRowEchelon = 0
 def is_row_echelon(matrix):
     # Create an array to store the position of pivot
