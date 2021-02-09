@@ -3,30 +3,35 @@ import numpy as np
 
 lastIndexRowEchelon = 0
 def is_row_echelon(matrix):
-    # Create an array to store the position of pivot
     isRowEchelon = False
+    # Create an array to store the position of pivot.
     arrSavePosition = []
-    for rIdex, row in enumerate(matrix):
-        # The sum of val before pivot each row
+    # for loop matrix
+    for rIdx, row in enumerate(matrix):
+        # The sum of val before pivot each row.
         sumEachRow = 0
         IsPivotexists = 1 in row
+        # There must be at least one 1 in each row.
         if IsPivotexists == False:
             isRowEchelon = False
             return isRowEchelon
         for cIdx, col in enumerate(row):
             sumEachRow = sumEachRow + col
             if col == 1:
+                # sum each row before 1 must be equal 0
                 if (sumEachRow - col) != 0:
                     return False
                 if(len(arrSavePosition) > 0):
-                    if rIdex > arrSavePosition[0][0] and cIdx > arrSavePosition[0][1]:
-                        arrSavePosition[0][0] = rIdex
+                    # In this case, it only occurs if the pivot number has exited 
+                    if rIdx > arrSavePosition[0][0] and cIdx > arrSavePosition[0][1]: # Stair step condition
+                        arrSavePosition[0][0] = rIdx
                         arrSavePosition[0][1] = cIdx
                     else:
                         isRowEchelon = False
                         return isRowEchelon
                 else:
-                    arrSavePosition.append([rIdex, cIdx])
+                    # In this case, it only occurs if the pivot number hasn't exited 
+                    arrSavePosition.append([rIdx, cIdx])
                 continue
     return True
             
